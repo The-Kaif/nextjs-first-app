@@ -9,15 +9,15 @@ function Profile() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    getUserDetails();
-  }, []);
+  // useEffect(() => {
+  //   getUserDetails();
+  // }, []);
 
-  const getUserDetails = async () => {
-    const res = await axios.get("/api/users/me");
-    console.log("user id", res.data.data._id);
-    router.push(`/profile/${res.data.data._id}`);
-  };
+  // const getUserDetails = async () => {
+  //   const res = await axios.get("/api/users/me");
+  //   console.log("user id", res.data.data._id);
+  //   router.push(`/profile/${res.data.data._id}`);
+  // };
 
   const logoutHanlder = async () => {
     try {

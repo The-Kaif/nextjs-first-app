@@ -77,6 +77,9 @@ function Login() {
       </button>
       <hr />
       <Link href={"signup"}>Visit Signup Page</Link>
+
+      <br/>
+      <p>Forget Password Click here: <Link className="bg-blue-500 text-white p-2" href={"/forgotpassword"}>Forgot Password</Link></p>
     </div>
   );
 }
