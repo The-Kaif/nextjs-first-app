@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css"; // Importing global CSS styles
 import { Toaster } from "react-hot-toast"; // Importing toast notification component
 
+
 // Configuring the Inter font with the Latin subset
 const inter = Inter({ subsets: ["latin"] });
 
