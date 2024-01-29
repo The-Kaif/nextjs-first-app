@@ -20,25 +20,26 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
     }
 
     var transport = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
+      service: "gmail",
       auth: {
-        user: "9be9f2f3eeae11",
-        pass: "692bded088a537",
+        user: process.env.EMAIL_USERNAME,
+        pass: process.env.EMAIL_PASSWORD,
       },
     });
 
+    console.log("Transport", transport);
+
     const mailOptions = {
-      from: "kaifmohammad5990@gmail.com",
+      from: "iammohdkaif15@gmail.com",
       to: email,
       subject:
         emailType === "VERIFY" ? "Verify your email" : "Reset your password",
-      html: `  <p>Click <a href='${process.env.DOMAIN}'/${
+      html: `  <p>Click <a target="_blank" href='${process.env.DOMAIN}/${
         emailType === "VERIFY" ? "verifyemail" : "confirmpassword"
-      }?token=${hashedToken}'>here<a/> 
+      }?token=${hashedToken}'>here</a>  
         to ${
           emailType === "VERIFY" ? "Verify your email" : "Reset your password"
-        } Or you can copy and paste the link below <br/>
+        } You can also manually copy and paste the following link into a new browser tab: <br/>
         ${process.env.DOMAIN}/${
         emailType === "VERIFY" ? "verifyemail" : "confirmpassword"
       }?token=${hashedToken}</p>`,
