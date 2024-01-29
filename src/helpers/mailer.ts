@@ -6,7 +6,6 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
   try {
     const hashedToken = await bcryptjs.hash(userId.toString(), 10);
 
-    console.log("Hashed token: " + hashedToken, "UserId: " + userId.toString());
     if (emailType === "VERIFY") {
       await User.findByIdAndUpdate(userId, {
         verifyToken: hashedToken,
@@ -27,7 +26,6 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       },
     });
 
-    console.log("Transport", transport);
 
     const mailOptions = {
       from: "iammohdkaif15@gmail.com",

@@ -12,6 +12,7 @@ const SideBar: React.FC = () => {
   const userId = window.location.pathname.split("/")[2];
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  
 
   // Logout handler function
   const logoutHandler = async () => {
@@ -23,7 +24,6 @@ const SideBar: React.FC = () => {
       // Redirect to the login page after successful logout
       router.push("/login");
     } catch (error: any) {
-      console.log(error.message);
       toast.error(error.message);
     } finally {
       setLoading(false);
@@ -39,7 +39,7 @@ const SideBar: React.FC = () => {
   useEffect(() => {
     const path = window.location.pathname.split("/")[3];
     setActiveRoute(path);
-  }, [window.location.pathname]);
+  }, [() => window.location.pathname]);
 
   // Render the sidebar with links and logout button
   return (

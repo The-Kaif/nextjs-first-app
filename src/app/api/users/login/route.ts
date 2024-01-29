@@ -14,7 +14,6 @@ export async function POST(request: NextRequest) {
     // Extract relevant data from the request body
     const requestData = await request.json();
     const { email, password } = requestData;
-    console.log(requestData);
 
     // Find the user by email in the database
     const user = await User.findOne({ email });

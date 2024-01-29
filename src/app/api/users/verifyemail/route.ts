@@ -14,7 +14,6 @@ export async function POST(request: NextRequest) {
     const { token } = reqBody;
     
     // Log the received token to the console for debugging
-    console.log(token);
 
     // Find a user with the provided verification token
     const user = await User.findOne({
@@ -27,8 +26,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid token" }, { status: 400 });
     }
 
-    // Log the found user details to the console for debugging
-    console.log(user);
 
     // Update the user's verification status and clear the verification token
     user.isVerified = true;

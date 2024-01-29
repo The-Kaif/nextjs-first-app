@@ -39,7 +39,6 @@ function Signup() {
         setLoading(true);
         // Send a signup request to the server
         const response = await axios.post("/api/users/signup", user);
-        console.log("Account created successfully", response.data);
         toast.success("Account created successfully");
         toast.success(
           "Please check your email to complete the account verification process.",

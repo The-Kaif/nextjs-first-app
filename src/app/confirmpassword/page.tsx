@@ -49,12 +49,10 @@ function ResetPasswordPage() {
             token,
             newPassword: password,
           });
-          console.log("Password updated successfully", res.data);
           toast.success("Password updated successfully");
           router.push("/login");
         }
       } catch (error: any) {
-        console.log(error.message);
         toast.error(error.response?.data?.error || "An error occurred");
       } finally {
         setLoading(false);

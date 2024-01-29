@@ -22,7 +22,6 @@ function page() {
 
         // Make a POST request to the '/api/users/forgotpassword' endpoint with the email data
         const res = await axios.post("/api/users/forgotpassword", { email });
-        console.log(res.data);
 
         // Display a success message using toast
         toast.success("Email sent successfully");

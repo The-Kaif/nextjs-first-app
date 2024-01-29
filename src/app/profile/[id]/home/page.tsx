@@ -77,7 +77,6 @@ function Home() {
     });
   }
 
-  console.log("Data: ", data);
 
   // JSX structure for the component's UI
   return (
