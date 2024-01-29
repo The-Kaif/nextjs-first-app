@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 // Define the functional component named 'page'
-function page() {
+function ForgotPassword() {
   // State variables for managing the email input, loading state, and handling email sending
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -77,4 +77,4 @@ function page() {
 }
 
 // Export the component as the default export
-export default page;
+export default ForgotPassword;
