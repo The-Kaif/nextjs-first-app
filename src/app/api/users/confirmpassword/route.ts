@@ -1,16 +1,20 @@
+// Import necessary modules and configurations
 import { connect } from "@/app/dbConfig/dbConfig";
 import { NextRequest, NextResponse } from "next/server";
 import { User } from "@/models/userModel";
 import bcryptjs from "bcryptjs";
 
+// Establish a connection to the database
 connect();
 
+// Define the main function for handling POST requests
 export async function POST(request: NextRequest) {
   try {
+    // Extract relevant data from the request body
     const reqBody = await request.json();
     const { token, newPassword } = reqBody;
 
-    // Validate token and newPassword (add additional validation if needed)
+    // Validate token and newPassword (additional validation can be added if needed)
 
     // Verify the token against the stored token in the database
     const user = await User.findOne({
@@ -29,6 +33,7 @@ export async function POST(request: NextRequest) {
     user.forgotPasswordToken = undefined;
     user.forgotPasswordTokenExpiry = undefined;
 
+    // Save the updated user data to the database
     await user.save();
 
     // Return a success response
