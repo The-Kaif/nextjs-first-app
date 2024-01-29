@@ -38,6 +38,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // If everything is fine, allow the request to proceed
+  // add the comment for somereason
 }
 
 export const config = {
