@@ -1,11 +1,31 @@
 // components/NavBar.tsx
 "use client"; // Assuming you're using the `client` module
-import React from "react";
-
+import axios from "axios";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 // Define the NavBar component
 const NavBar: React.FC = () => {
- 
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  // Logout handler function
+  const logoutHandler = async () => {
+    try {
+      setLoading(true);
+      // Make a request to the server to logout
+      const response = await axios.get("/api/users/logout");
+      toast.success("Logout Successfully");
+      // Redirect to the login page after successful logout
+      router.push("/login");
+    } catch (error: any) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
@@ -31,10 +51,13 @@ const NavBar: React.FC = () => {
               </span>
             </div>
           </div>
-
-          {/* Additional elements in the navigation bar */}
           <div className="flex items-center">
-            {/* You can add more navigation-related elements here */}
+            <div
+              onClick={logoutHandler}
+              className="block cursor-pointer p-2 bg-red-600 text-white rounded-xl text-center"
+            >
+              {loading ? "Logout..." : "Logout"}
+            </div>
           </div>
         </div>
       </div>

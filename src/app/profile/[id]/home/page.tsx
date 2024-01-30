@@ -3,6 +3,7 @@
 import Layout from "@/app/components/Layout";
 import { MakeTypesIntoTags, PokemonTable } from "@/helpers/CommonRender";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import toast from "react-hot-toast";
 
 // Define the functional component named 'Home'
@@ -30,24 +31,21 @@ function Home() {
   // Function to fetch a list of Pokemon
   async function fetchPokemon() {
     try {
-      const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon?limit=15`
-      );
-      const allpokemon = await response.json();
+      const response = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=15");
+      const allpokemon = response.data;
 
-      for (const pokemon of allpokemon.results) {
-        await fetchPokemonData(pokemon);
-      }
+      // Use Promise.all to wait for all fetchPokemonData promises to resolve
+      await Promise.all(allpokemon.results.map((pokemon: any) => fetchPokemonData(pokemon.url)));
     } catch (error) {
       console.error("Error fetching Pokemon:", error);
     }
   }
 
   // Function to fetch detailed data of a specific Pokemon
-  async function fetchPokemonData(pokemon: any) {
+  async function fetchPokemonData(pokemonUrl: string) {
     try {
-      const response = await fetch(pokemon.url);
-      const pokeData = await response.json();
+      const response = await axios.get(pokemonUrl);
+      const pokeData = response.data;
       renderPokemon(pokeData);
     } catch (error) {
       console.error("Error fetching Pokemon data:", error);
@@ -60,7 +58,7 @@ function Home() {
       id: pokeData.order,
       name: pokeData.name,
       image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeData.id}.png`,
-      types: pokeData.types,
+      types: MakeTypesIntoTags(pokeData.types),
     };
 
     setData((prevData: any) => {
@@ -76,7 +74,6 @@ function Home() {
       return prevData.map((item: any) => (item.id === obj.id ? obj : item));
     });
   }
-
 
   // JSX structure for the component's UI
   return (

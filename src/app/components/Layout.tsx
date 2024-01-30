@@ -21,7 +21,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       {/* Main content area */}
       <div className="p-4 sm:ml-64">
         {/* Border and styling for the content */}
-        <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+        <div className="p-4 ms-7 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
           {/* Render the children components, which are the actual content */}
           {children}
         </div>
